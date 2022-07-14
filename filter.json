@@ -1,0 +1,11 @@
+{
+  "description": "indev",
+  "filters": [
+    {
+      "name": "rego-level",
+      "runWith": "python",
+      "script": "rego-level.py",
+      "arguments": []
+    }
+  ]
+}
