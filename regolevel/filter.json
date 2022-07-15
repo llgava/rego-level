@@ -2,7 +2,7 @@
   "description": "indev",
   "filters": [
     {
-      "name": "rego-level",
+      "name": "regolevel",
       "runWith": "python",
       "script": "./rego-level.py"
     }
