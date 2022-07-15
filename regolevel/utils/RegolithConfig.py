@@ -1,7 +1,7 @@
 import json
 
 def get_profile(name: str):
-  with open('config.json', 'r') as config_file:
+  with open('./config.json', 'r') as config_file:
     data = json.load(config_file)
     profiles = data['regolith']['profiles']
 
