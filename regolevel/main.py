@@ -6,6 +6,7 @@ def main():
   profile = RegolithConfig.get_profile('build')
 
   GAME_PATH = BedrockPaths.get_game_path()
+  print(GAME_PATH)
   BedrockPaths.get_worlds(GAME_PATH)
 
 if __name__ == '__main__':
