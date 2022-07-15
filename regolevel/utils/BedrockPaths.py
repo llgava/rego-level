@@ -6,7 +6,8 @@ WORLDS = []
 
 def get_game_path() -> str:
   if(platform.system() != 'Windows'):
-    raise AssertionError('Unsupported operating system: ' + platform.system())
+    return ''
+    #raise AssertionError('Unsupported operating system: ' + platform.system())
 
   return os.path.join(APPDATA, 'Packages', 'Microsoft.MinecraftUWP_8wekyb3d8bbwe', 'LocalState', 'games', 'com.mojang')
 

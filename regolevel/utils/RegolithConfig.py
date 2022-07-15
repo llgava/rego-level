@@ -2,7 +2,9 @@ import json
 import os
 
 def get_profile(name: str):
-  CONFIG_JSON = os.path.join('../../', os.getcwd(), 'config.json')
+  CONFIG_JSON = os.path.abspath(
+    os.path.join(os.getcwd(), '../..', 'config.json')
+  )
 
   with open(CONFIG_JSON, 'r') as config_file:
     data = json.load(config_file)
