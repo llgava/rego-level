@@ -6,7 +6,7 @@ def main():
   profile = RegolithConfig.get_profile('build')
 
   # Setup filter
-  RegolithConfig.create_data_folder()
+  #RegolithConfig.create_data_folder()
 
   # Execute filter actions
   GAME_PATH = BedrockPaths.get_game_path()
