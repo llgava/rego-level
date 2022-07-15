@@ -1,9 +1,8 @@
-from termcolor import colored
 import utils.RegolithConfig as RegolithConfig
 import utils.BedrockPaths as BedrockPaths
 
 def main():
-  print(colored('Running regolevel', 'green')) # Should be removed in the future
+  print('Running regolevel...') # Should be removed in the future
   profile = RegolithConfig.get_profile('build')
 
   # Setup filter
