@@ -12,7 +12,7 @@ def get_game_path() -> str:
 def get_worlds(game_path = get_game_path()):
   WORLDS = []
 
-  for dir in os.listdir(game_path, 'minecraftWorlds'):
+  for dir in os.listdir(f'{game_path}/minecraftWorlds')):
     WORLD_FOLDER = os.path.join(game_path, 'minecraftWorlds', dir)
 
     if(os.path.isdir(WORLD_FOLDER)):
