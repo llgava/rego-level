@@ -4,7 +4,7 @@
     {
       "name": "regolevel",
       "runWith": "python",
-      "script": "./regolevel.py"
+      "script": "./main.py"
     }
   ]
 }
