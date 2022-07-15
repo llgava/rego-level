@@ -21,7 +21,7 @@ def get_worlds(game_path = get_game_path()):
       with open(LEVELNAME_TXT, 'r') as levelname_file:
         WORLDS.append(
           {
-            'name': levelname_file.readline(0),
+            'name': levelname_file.readline(),
             'path': WORLD_FOLDER
           }
         )
