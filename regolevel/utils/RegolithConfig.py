@@ -2,7 +2,7 @@ import json
 import os
 
 REGOLITH_PROJECT_ROOT = os.path.abspath(
-  os.path.join(os.getcwd(), '../..') # !, '../..'
+  os.path.join(os.getcwd(), '../..')
 )
 
 """ Return regolith 'config.json' data. """

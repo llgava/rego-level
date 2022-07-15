@@ -9,8 +9,8 @@ def main():
   #RegolithConfig.create_data_folder()
 
   # Execute filter actions
-  GAME_PATH = BedrockPaths.get_game_path()
-  BedrockPaths.get_worlds(GAME_PATH)
+  worlds = BedrockPaths.get_worlds()
+  print(worlds)
 
 if __name__ == '__main__':
   main()
