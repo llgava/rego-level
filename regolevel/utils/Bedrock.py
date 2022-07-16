@@ -1,6 +1,7 @@
 import os
 import platform
 import time
+from utils import Regolevel
 
 APPDATA = os.getenv('LOCALAPPDATA')
 
@@ -19,14 +20,15 @@ def get_worlds(game_path = get_game_path()):
     if(os.path.isdir(WORLD_FOLDER)):
       LEVELNAME_TXT = os.path.join(WORLD_FOLDER, 'levelname.txt')
 
-      with open(LEVELNAME_TXT, 'r') as levelname_file:
-        WORLDS.append(
-          {
-            'name': levelname_file.readline(),
-            'path': WORLD_FOLDER,
-            'last_modified': get_world_last_modified(WORLD_FOLDER)
-          }
-        )
+      if(os.path.exists(LEVELNAME_TXT)):
+        with open(LEVELNAME_TXT, 'r') as levelname_file:
+          WORLDS.append(
+            {
+              'name': levelname_file.readline(),
+              'path': WORLD_FOLDER,
+              'last_modified': get_world_last_modified(WORLD_FOLDER)
+            }
+          )
 
   return WORLDS
 

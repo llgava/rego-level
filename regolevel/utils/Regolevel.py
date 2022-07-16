@@ -15,6 +15,9 @@ def copy_level():
     os.path.join(os.getcwd(), '../..', get_setting('levelPath'))
   )
 
-  for (root, _dirs, _files) in os.walk(LEVEL_PATH):
-    file_destination = Bedrock.get_world(get_setting('worldName'))['path'] + root.replace(LEVEL_PATH, '')
-    shutil.copytree(root, file_destination, dirs_exist_ok=True)
+  if(not Bedrock.get_world(get_setting('worldName')) is None):
+    for (root, _dirs, _files) in os.walk(LEVEL_PATH):
+      file_destination = Bedrock.get_world(get_setting('worldName'))['path'] + root.replace(LEVEL_PATH, '')
+      shutil.copytree(root, file_destination, dirs_exist_ok=True)
+  else:
+    print('Unable to find the world', get_setting('worldName'))
