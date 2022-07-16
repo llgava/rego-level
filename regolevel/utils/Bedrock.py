@@ -1,5 +1,6 @@
 import os
 import platform
+import time
 
 APPDATA = os.getenv('LOCALAPPDATA')
 
@@ -22,12 +23,24 @@ def get_worlds(game_path = get_game_path()):
         WORLDS.append(
           {
             'name': levelname_file.readline(),
-            'path': WORLD_FOLDER
+            'path': WORLD_FOLDER,
+            'last_modified': get_world_last_modified(WORLD_FOLDER)
           }
         )
 
   return WORLDS
 
+def get_world(name: str):
+  for world in get_worlds():
+    if(world['name'] == name):
+      return world
 
-""" def is_wsl() -> bool:
+def get_world_last_modified(path: str):
+  modification_time_stamp = os.path.getmtime(path)
+  modification_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(modification_time_stamp))
+
+  return modification_time
+
+""" Testing WSL compatibility on the future.
+def is_wsl() -> bool:
   return 'microsoft-standard' in platform.uname().release """
