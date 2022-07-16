@@ -21,3 +21,11 @@ def copy_level():
       shutil.copytree(root, file_destination, dirs_exist_ok=True)
   else:
     print('Unable to find the world', get_setting('worldName'))
+
+def create_level_dir():
+  LEVEL_PATH = os.path.abspath(
+    os.path.join(os.getcwd(), '../..', get_setting('levelPath'))
+  )
+
+  if(not os.path.exists(LEVEL_PATH)):
+    os.mkdir(LEVEL_PATH)
