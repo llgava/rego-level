@@ -11,8 +11,7 @@ regolith install github.com/llgava/regolith-filters/regolevel
       "filter": "regolevel",
       "settings": {
         "levelPath": "./packs/level",
-        "worldName": "Spellcraft",
-        "ignore": []
+        "worldName": "Spellcraft"
       }
     }
   ]

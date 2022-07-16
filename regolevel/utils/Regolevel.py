@@ -10,7 +10,6 @@ def get_setting(arg: str):
 
   return args[arg]
 
-
 def copy_level():
   LEVEL_PATH = os.path.abspath(
     os.path.join(os.getcwd(), '../..', get_setting('levelPath'))

@@ -14,7 +14,6 @@ def get_config():
     data = json.load(config_file)
     return data
 
-
 def get_profile(name: str):
   profiles = get_config()['regolith']['profiles']
 
@@ -22,7 +21,6 @@ def get_profile(name: str):
     return profiles[name]
   else:
     return profiles['default']
-
 
 def get_filters_from(profile: str):
   return get_config()['regolith']['profiles'][profile]['filters']
