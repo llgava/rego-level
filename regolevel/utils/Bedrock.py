@@ -1,7 +1,6 @@
 import os
 import platform
 import time
-from utils import Regolevel
 
 APPDATA = os.getenv('LOCALAPPDATA')
 

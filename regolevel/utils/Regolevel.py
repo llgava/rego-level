@@ -1,6 +1,4 @@
 import ast
-from genericpath import exists
-from importlib.resources import path
 import os
 import shutil
 import sys
