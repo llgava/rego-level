@@ -1,4 +1,6 @@
 import ast
+from genericpath import exists
+from importlib.resources import path
 import os
 import shutil
 import sys
@@ -10,18 +12,6 @@ def get_setting(arg: str):
 
   return args[arg]
 
-def copy_level():
-  LEVEL_PATH = os.path.abspath(
-    os.path.join(os.getcwd(), '../..', get_setting('levelPath'))
-  )
-
-  if(not Bedrock.get_world(get_setting('worldName')) is None):
-    for (root, _dirs, _files) in os.walk(LEVEL_PATH):
-      file_destination = Bedrock.get_world(get_setting('worldName'))['path'] + root.replace(LEVEL_PATH, '')
-      shutil.copytree(root, file_destination, dirs_exist_ok=True)
-  else:
-    print('Unable to find the world', get_setting('worldName'))
-
 def create_level_dir():
   LEVEL_PATH = os.path.abspath(
     os.path.join(os.getcwd(), '../..', get_setting('levelPath'))
@@ -29,3 +19,20 @@ def create_level_dir():
 
   if(not os.path.exists(LEVEL_PATH)):
     os.mkdir(LEVEL_PATH)
+
+def copy_level():
+  LEVEL_PATH = os.path.abspath(
+    os.path.join(os.getcwd(), '../..', get_setting('levelPath'))
+  )
+
+  if(not Bedrock.get_world(get_setting('worldName')) is None):
+
+    for (root, dirs, _files) in os.walk(LEVEL_PATH):
+      file_destination = Bedrock.get_world(get_setting('worldName'))['path'] + root.replace(LEVEL_PATH, '')
+
+      if('db' in dirs):
+        shutil.rmtree(os.path.join(file_destination, 'db'), ignore_errors=True)
+
+      shutil.copytree(root, file_destination, dirs_exist_ok=True)
+  else:
+    print('Unable to find the world', get_setting('worldName'))
