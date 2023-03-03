@@ -1,5 +1,5 @@
 import os
-import remover as RemoveManager
+import core.remover as RemoveManager
 
 TEXTURES_FOLDER = os.path.join('RP', 'textures')
 
