@@ -1,6 +1,7 @@
 import os
 import json5
 from glob import glob
+from termcolor import colored
 
 import utils.file_manager as FileManager
 
@@ -16,7 +17,7 @@ def remove_texture_atlas(path: str):
 
     if (is_aseprite_texture_atlas(full_path)):
       FileManager.delete_file(full_path)
-      print("The texture atlas configuration " + file + " was removed.")
+      print(full_path + " was removed.", colored("(Aseprite Texture Atlas)", "light_grey"))
 
 def is_aseprite_texture_atlas(path: str) -> bool:
   json_file = open(path, 'r')
@@ -40,4 +41,4 @@ def remove_files_with_ext(extensions: list):
     if (ext in extensions):
       full_path = path + ext
       FileManager.delete_file(full_path)
-      print("The file " + path + " was removed because the extension.")
+      print(full_path + " was removed.", colored("(Extension not allowed/required)", "light_grey"))
