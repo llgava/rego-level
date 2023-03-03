@@ -1,0 +1,10 @@
+{
+  "description": "Remove extra files from the build, such as: .bbmodel, .ase and Aseprite Texture Atlas configuration.",
+  "filters": [
+    {
+      "name": "rego-remover",
+      "runWith": "python",
+      "script": "./main.py"
+    }
+  ]
+}

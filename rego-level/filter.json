@@ -1,0 +1,10 @@
+{
+  "description": "Remove the old world files to new ones on every build. (Need game restart every time)",
+  "filters": [
+    {
+      "name": "rego-level",
+      "runWith": "python",
+      "script": "./main.py"
+    }
+  ]
+}

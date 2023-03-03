@@ -1,6 +1,6 @@
 ## Instalation
 ```sh
-regolith install github.com/llgava/regolith-filters/regolevel
+regolith install github.com/llgava/regolith-filters/rego-level
 ```
 
 ## Configuration
@@ -8,7 +8,7 @@ regolith install github.com/llgava/regolith-filters/regolevel
 {
   "filters": [
     {
-      "filter": "regolevel",
+      "filter": "rego-level",
       "settings": {
         "levelPath": "./packs/level",
         "worldName": "Spellcraft"
