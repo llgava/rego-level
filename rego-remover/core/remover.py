@@ -15,11 +15,9 @@ def remove_texture_atlas(path: str):
 
   for file in json_files:
     full_path = os.path.join(path, file)
-    name = os.path.basename(full_path).split("/")[-1]
 
     if (__is_aseprite_texture_atlas(full_path)):
       FileManager.delete_file(full_path)
-      print("Aseprite Texture Atlas: " + name + " successfully removed.")
 
 def __is_aseprite_texture_atlas(path: str) -> bool:
   json_file = open(path, 'r')
