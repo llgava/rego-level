@@ -1,5 +1,5 @@
 # rego-remover
-Remove extra files from the build, such as: .bbmodel, .ase and Aseprite Texture Atlas configuration.
+Remove extra files or objects from the build such as: .bbmode, .ase, Geckolib Animation Artifacts and Aseprite Atlas Configurations.
 
 ## Instalation
 ```sh
