@@ -3,7 +3,7 @@ Every filter created by Leonardo '_Fyat' Gava for the [Regolith](https://github.
 
 | Project      | Latest Version | Description                                                                                          | Receive Updates |
 |--------------|----------------|------------------------------------------------------------------------------------------------------|-----------------|
-| [rego-remover](./rego-remover/) |      1.0.0     | Remove extra files from the build, such as: .bbmodel, .ase and Aseprite Texture Atlas configuration. |        ✔        |
+| [rego-remover](./rego-remover/) |      1.1.0     | Remove extra files or objects from the build such as: .bbmode, .ase, Geckolib Animation Artifacts and Aseprite Atlas Configurations. |        ✔        |
 | [rego-level](./rego-level/)    |      1.0.0     | Remove the old world files to new ones on every build. (Need game restart every time)                |        ✖        |
 
 ### Contact
