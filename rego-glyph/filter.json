@@ -1,0 +1,10 @@
+{
+  "description": "Generate a markdown table with all the unicode for custom emojis on glyph_E1.png file.",
+  "filters": [
+    {
+      "name": "rego-glyph",
+      "runWith": "python",
+      "script": "./main.py"
+    }
+  ]
+}

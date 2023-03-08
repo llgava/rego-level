@@ -2,3 +2,6 @@
 **/.vscode/
 **/.env
 **/venv
+**/__tests__
+**/RP
+**/BP
