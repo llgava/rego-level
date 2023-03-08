@@ -59,7 +59,7 @@ def getGlyphAreas(path: str):
 
     if (len(valid_pixels) >= 5):
       cropped_image_resized = cropped_image.resize((32, 32), Image.BOX)
-      cropped_image_resized.save(f"test/gen/test_{i}.png")
+      cropped_image_resized.save(f"__test__/{i}.png")
 
     current_column += 1
     i+=1
