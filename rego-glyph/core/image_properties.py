@@ -1,4 +1,6 @@
 from PIL import Image
+from core.glyph_icon import GlyphIcon
+from core.hex import *
 
 def getImageSize(path: str):
   image = Image.open(path)
@@ -11,7 +13,8 @@ def getAreaImageSize(path: str):
 
   return (int(w / 16), int(h / 16))
 
-def getGlyphAreas(path: str):
+def getGlyphAreas(path: str) -> list[dict]:
+  valid_glyphs: list = []
   glyph_w, glyph_h = getImageSize(path)
   area_w, area_h = getAreaImageSize(path)
 
@@ -61,7 +64,18 @@ def getGlyphAreas(path: str):
       cropped_image_resized = cropped_image.resize((32, 32), Image.BOX)
       cropped_image_resized.save(f"__test__/{i}.png")
 
+      CODE = parse(current_line) + parse(current_column)
+
+      valid_glyphs.append(
+        GlyphIcon(
+          CODE,
+          "PATH_TO_PREVIEW_IMAGE",
+          (current_column, current_line)
+        ).to_dict()
+      )
+
     current_column += 1
     i+=1
 
   print("Collection finished.")
+  return valid_glyphs
