@@ -1,7 +1,6 @@
 import os
 import core.markdown_generator as MarkdownGenerator
 
-GLYPH_E1 = os.path.join('example', 'resource_pack', 'font', 'glyph_E1.png')
 SAVE_PATH = os.path.join('GLYPH_E1.md')
 
 # Execute filter actions

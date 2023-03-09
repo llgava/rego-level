@@ -5,6 +5,7 @@ from core.hex import HexParser
 
 class Glyph_E1:
   IMAGE_PATH = os.path.join('RP', 'font', 'glyph_E1.png')
+  PREVIEW_PATH = os.path.join('.github', 'assets')
 
   @staticmethod
   def get_size() -> tuple[int, int]:
@@ -102,7 +103,7 @@ class Glyph_E1:
         POS = (current_column, current_line)
 
         cropped_image_resized = cropped_image.resize((32, 32), Image.BOX)
-        cropped_image_resized.save(f".github/assets/preview_{content_index}.png")
+        cropped_image_resized.save(f"{Glyph_E1.PREVIEW_PATH}/preview_{content_index}.png")
 
         valid_glyphs.append(
           GlyphContent(CODE, IMAGE_MD, POS)
