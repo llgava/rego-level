@@ -1,6 +1,6 @@
 from enum import Enum
 
-class HexParser(Enum):
+class HexParserEnum(Enum):
   A = 10
   B = 11
   C = 12
@@ -8,12 +8,36 @@ class HexParser(Enum):
   E = 14
   F = 15
 
-def parse(value: int):
-  if (value >= 0 and value <= 9):
-    return str(value)
+class HexParser:
+  @staticmethod
+  def parse(value: int) -> str:
+    """
+      Convert tens+ to hexadecimal values.
 
-  for item in HexParser:
-    if item.value == value:
-      return item.name
+      Args:
+          value (int): The number to convert in hexadecimal.
+      Returns:
+          str: The number converted in hexadecimal.
+    """
 
-  return str(0)
+    if (value >= 0 and value <= 9):
+      return str(value)
+
+    for item in HexParserEnum:
+      if item.value == value:
+        return item.name
+
+    return str(0)
+
+  @staticmethod
+  def to_decimal(value: str) -> str:
+    """
+      Convert hexadecimal string into decimal string.
+
+      Args:
+          value (str): Hexadecimal string.
+      Returns:
+          str: The hexadecimal string converted into decimal string
+    """
+
+    return str(int(value, 16))

@@ -1,81 +1,116 @@
+import os
 from PIL import Image
-from core.glyph_icon import GlyphIcon
-from core.hex import *
+from core.glyph_content import GlyphContent
+from core.hex import HexParser
 
-def getImageSize(path: str):
-  image = Image.open(path)
-  w, h = image.size
+class Glyph_E1:
+  IMAGE_PATH = os.path.join('RP', 'font', 'glyph_E1.png')
 
-  return (w, h)
+  @staticmethod
+  def get_size() -> tuple[int, int]:
+    """
+      Args:
+          glyph_E1 (str): The path to glyph_E1.png.
 
-def getAreaImageSize(path: str):
-  w, h = getImageSize(path)
+      Returns:
+          tuple[int, int]: The size of glyph_E1.png
+    """
 
-  return (int(w / 16), int(h / 16))
+    image = Image.open(Glyph_E1.IMAGE_PATH)
+    width, height = image.size
 
-def getGlyphAreas(path: str) -> list[dict]:
-  valid_glyphs: list = []
-  glyph_w, glyph_h = getImageSize(path)
-  area_w, area_h = getAreaImageSize(path)
+    return (width, height)
 
-  initial_area = (0, 0, area_w, area_h)
-  current_area_position = initial_area
+  @staticmethod
+  def get_content_size() -> tuple[int, int]:
+    """
+      Args:
+          glyph_E1 (str): The path to glyph_E1.png.
 
-  current_column = 0
-  current_line = 0
+      Returns:
+          tuple[int, int]: The size of contents.
+    """
 
-  max_images = int((glyph_w / area_w) * 16)
-  i = 0
-  while not (i == max_images):
-    if (current_column == (glyph_w / area_w)):
-      current_column = 0
-      current_line += 1
-      current_area_position = (
-        initial_area[0],
-        current_area_position[1] + area_h,
-        initial_area[2],
-        current_area_position[3] + area_h,
+    width, height = Glyph_E1.get_size()
+
+    return (int(width / 16), int(height / 16))
+
+  @staticmethod
+  def get_contents() -> list[dict]:
+    """
+      Return a list of content on glyph_E1.png.\n
+      Only contents with 5+ pixels are valid.
+
+      Args:
+          glyph_E1 (str): The path to glyph_E1.png.
+
+      Returns:
+          list[dict]: A list of glyph_E1.png content.
+    """
+    print(f"Collecting content from {Glyph_E1.IMAGE_PATH}...")
+
+    valid_glyphs = []
+    glyph_w, glyph_h = Glyph_E1.get_size()
+    content_w, content_h = Glyph_E1.get_content_size()
+
+    initial_pos = (0, 0, content_w, content_h)
+    current_content_pos = initial_pos
+
+    current_column = 0
+    current_line = 0
+
+    content_index = 0
+    max_contents = int((glyph_w / content_w) * 16)
+
+    while not (content_index == max_contents):
+      if (current_column == (glyph_w / content_w)):
+        current_column = 0
+        current_line += 1
+        current_content_pos = (
+          initial_pos[0],
+          current_content_pos[1] + content_h,
+          initial_pos[2],
+          current_content_pos[3] + content_h,
+        )
+
+      image = Image.open(Glyph_E1.IMAGE_PATH)
+      cropped_image = image.crop(current_content_pos)
+
+      current_content_pos = (
+        current_content_pos[0] + content_w,
+        current_content_pos[1],
+        current_content_pos[2] + content_w,
+        current_content_pos[3],
       )
 
-    image = Image.open(path)
-    cropped_image = image.crop(current_area_position)
+      # Check if the cropped area is empty
+      valid_pixels = []
+      pixels = cropped_image.load()
+      content_w, content_h = Glyph_E1.get_content_size()
 
-    current_area_position = (
-      current_area_position[0] + area_w,
-      current_area_position[1],
-      current_area_position[2] + area_w,
-      current_area_position[3],
-    )
+      for x in range(content_w):
+        for y in range(content_h):
+          pixel = pixels[x, y] # type: ignore
 
-    # Check if the cropped area is empty
-    valid_pixels = []
-    pixels = cropped_image.load()
-    area_w, area_h = getAreaImageSize(path)
+          if (pixel == (0, 0, 0, 0)): continue
 
-    for x in range(area_w):
-      for y in range(area_h):
-        pixel = pixels[x, y]
+          valid_pixels.append(pixel)
 
-        if (pixel == (0, 0, 0, 0)): continue
+      if (len(valid_pixels) >= 5):
+        CODE = HexParser.parse(current_line) + HexParser.parse(current_column)
+        IMAGE_MD = f"![preview_{content_index}](.github/assets/preview_{content_index}.png)"
+        POS = (current_column, current_line)
 
-        valid_pixels.append(pixel)
+        cropped_image_resized = cropped_image.resize((32, 32), Image.BOX)
+        cropped_image_resized.save(f".github/assets/preview_{content_index}.png")
 
-    if (len(valid_pixels) >= 5):
-      cropped_image_resized = cropped_image.resize((32, 32), Image.BOX)
-      cropped_image_resized.save(f"__test__/{i}.png")
+        valid_glyphs.append(
+          GlyphContent(CODE, IMAGE_MD, POS)
+            .to_dict()
+        )
 
-      CODE = parse(current_line) + parse(current_column)
+      current_column += 1
+      content_index+=1
 
-      valid_glyphs.append(
-        GlyphIcon(
-          CODE,
-          "PATH_TO_PREVIEW_IMAGE",
-          (current_column, current_line)
-        ).to_dict()
-      )
-
-    current_column += 1
-    i+=1
-
-  print("Collection finished.")
-  return valid_glyphs
+    print("Content collected!")
+    return valid_glyphs

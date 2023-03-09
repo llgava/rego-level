@@ -1,5 +1,6 @@
 # rego-glyph
-Generate a markdown table with all the unicode for custom emojis on `glyph_E1.png` file.
+Generates a markdown containing all icon configuration in the `glyph_E1.png` image.<br />
+[Click here](./example/) to see an example.
 
 ## Instalation
 ```sh

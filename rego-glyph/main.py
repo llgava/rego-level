@@ -1,11 +1,12 @@
 import os
-import core.image_properties as ImageProps
+import core.markdown_generator as MarkdownGenerator
 
-GLYPH_E1 = os.path.join('RP', 'font', 'glyph_E1.png')
+GLYPH_E1 = os.path.join('example', 'resource_pack', 'font', 'glyph_E1.png')
+SAVE_PATH = os.path.join('GLYPH_E1.md')
 
 # Execute filter actions
 def main():
-  print(ImageProps.getGlyphAreas(GLYPH_E1))
+  MarkdownGenerator.generate_markdown_file(SAVE_PATH)
 
 if __name__ == '__main__':
   main()
