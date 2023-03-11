@@ -5,7 +5,7 @@ from glob import glob
 
 import utils.file_manager as FileManager
 
-def remove_aseprite_animations(path: str):
+def remove_aseprite_flipbooks(path: str):
   """ Removes Aseprite JSON Animations from invalid paths. """
   print("Removing Aseprite Flip book on invalid paths...")
   json_files = glob(root_dir=path, pathname="**/*.json", recursive=True)
@@ -13,10 +13,10 @@ def remove_aseprite_animations(path: str):
   for file in json_files:
     full_path = os.path.join(path, file)
 
-    if (__is_invalid_aseprite_animation(full_path)):
+    if (_is_invalid_aseprite_flipbook(full_path)):
       FileManager.delete_file(full_path)
 
-def __is_invalid_aseprite_animation(path: str) -> bool:
+def _is_invalid_aseprite_flipbook(path: str) -> bool:
   if ("textures/ui" in path): return False
 
   json_file = open(path, 'r')

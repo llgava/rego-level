@@ -1,5 +1,5 @@
 {
-  "description": "Remove extra files or objects from the build such as: .bbmode, .ase, Geckolib Animation Artifacts and Aseprite Flip book from invalid paths.",
+  "description": "Remove extra files or objects from the build such as: .bbmode, .ase, Geckolib Animation Artifacts and Aseprite Flipbook from invalid paths.",
   "filters": [
     {
       "name": "rego-remover",
