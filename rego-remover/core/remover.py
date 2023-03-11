@@ -5,21 +5,20 @@ from glob import glob
 
 import utils.file_manager as FileManager
 
-def remove_texture_atlas(path: str):
-  """
-    Removes Aseprite Texture Atlas configurations.
-    This function only search files on specified path.
-  """
-  print("Removing Aseprite atlas configurations...")
+def remove_aseprite_animations(path: str):
+  """ Removes Aseprite JSON Animations from invalid paths. """
+  print("Removing Aseprite Flip book on invalid paths...")
   json_files = glob(root_dir=path, pathname="**/*.json", recursive=True)
 
   for file in json_files:
     full_path = os.path.join(path, file)
 
-    if (__is_aseprite_texture_atlas(full_path)):
+    if (__is_invalid_aseprite_animation(full_path)):
       FileManager.delete_file(full_path)
 
-def __is_aseprite_texture_atlas(path: str) -> bool:
+def __is_invalid_aseprite_animation(path: str) -> bool:
+  if ("textures/ui" in path): return False
+
   json_file = open(path, 'r')
   data = json5.loads(json_file.read())
 
@@ -29,9 +28,7 @@ def __is_aseprite_texture_atlas(path: str) -> bool:
   return data["meta"]["app"] == "https://www.aseprite.org/"
 
 def remove_geckolib_artifacts(path: str) -> None:
-  """
-    Removes Geckolib animations objects.
-  """
+  """ Removes Geckolib animations objects. """
   print("Removing Geckolib animations artifacts...")
   json_files = glob(root_dir=path, pathname="**/*.json", recursive=True)
 
@@ -52,9 +49,7 @@ def remove_geckolib_artifacts(path: str) -> None:
       json.dump(data, anim_file, indent=2)
 
 def remove_files_with_ext(extensions: list):
-  """
-    Removes files with specified extensions.
-  """
+  """ Removes files with specified extensions. """
   print("Removing not allowed/required files...")
   files = glob(root_dir=".", pathname="**/*.*", recursive=True)
 
