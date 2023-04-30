@@ -90,6 +90,7 @@ class Glyph_E1:
       content_w, content_h = Glyph_E1.get_content_size()
 
       for x in range(content_w):
+
         for y in range(content_h):
           pixel = pixels[x, y] # type: ignore
 
