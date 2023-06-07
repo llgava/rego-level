@@ -1,0 +1,10 @@
+{
+  "description": "Setup all the UUID for your project.",
+  "filters": [
+    {
+      "name": "rego-uuid",
+      "runWith": "python",
+      "script": "./main.py"
+    }
+  ]
+}
