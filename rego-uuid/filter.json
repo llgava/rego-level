@@ -1,5 +1,5 @@
 {
-  "description": "Setup all the UUID for your project.",
+  "description": "Setup every manifest uuid for your project.",
   "filters": [
     {
       "name": "rego-uuid",
