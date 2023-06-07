@@ -2,7 +2,6 @@ import sys
 import json
 from default_config import DEFAULT_CONFIGURATION
 
-
 ALLOWED_TARGETS = ['world', 'development', 'dev']
 
 class Configuration:
@@ -61,7 +60,7 @@ class Configuration:
       try:
         settings = settings[value]
       except IndexError:
-        print(f"No {value} setting found! Using default settings.")
+        print(f"No {value} setting found! Using default {value} setting.")
         settings = DEFAULT_CONFIGURATION[value]
 
     except IndexError:

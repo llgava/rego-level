@@ -3,7 +3,7 @@ RP_MANIFEST = '''{
   "header": {
     "name": "$pack_name",
     "description": "$pack_description",
-    "uuid": "$bp_uuid",
+    "uuid": "$rp_uuid",
     "version": $pack_version,
     "min_engine_version": $game_version
   },
