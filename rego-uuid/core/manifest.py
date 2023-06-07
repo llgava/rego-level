@@ -26,18 +26,19 @@ class Manifest:
       .replace('$random_uuid', str(uuid4()))
 
   def build(self):
-    if not (os.path.exists(self.path)):
-      PATH = Path(self.path)
-      manifestJSON = PATH.parent.resolve()
-      os.makedirs(manifestJSON, exist_ok=True)
+    if (os.path.exists(self.path)):
+      os.remove(self.path)
 
-      with open(PATH, 'w') as file:
-        initial_data = json5.loads(self.model)
-        json.dump(initial_data, file, indent=2)
+    PATH = Path(self.path)
+    manifestJSON = PATH.parent.resolve()
+    os.makedirs(manifestJSON, exist_ok=True)
 
-      return
+    with open(PATH, 'w') as file:
+      initial_data = json5.loads(self.model)
+      json.dump(initial_data, file, indent=2)
 
-    self.update()
+    return
+
 
   def update(self):
     print("SHOULD UPDATE!")

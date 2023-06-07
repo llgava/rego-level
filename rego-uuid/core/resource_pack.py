@@ -8,7 +8,6 @@ class ResourcePackManifest(Manifest):
   def __init__(self, path: str, uuid: str) -> None:
     super().__init__(path, RP_MANIFEST)
     self.uuid = uuid
-
     self.updateModel()
 
   def updateModel(self):

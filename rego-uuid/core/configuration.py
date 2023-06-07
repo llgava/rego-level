@@ -5,6 +5,7 @@ from default_config import DEFAULT_CONFIGURATION
 ALLOWED_TARGETS = ['world', 'development', 'dev']
 
 class Configuration:
+  LOG_DEFAULT_SETTINGS = False
 
   @staticmethod
   def getTarget():
@@ -64,7 +65,11 @@ class Configuration:
         settings = DEFAULT_CONFIGURATION[value]
 
     except IndexError:
-      print("No settings found! Using default settings.")
+      if not (Configuration.LOG_DEFAULT_SETTINGS):
+        print("No settings found! Using default settings.")
+
+      Configuration.LOG_DEFAULT_SETTINGS = True
+
       settings = DEFAULT_CONFIGURATION[value]
 
 

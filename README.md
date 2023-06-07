@@ -5,7 +5,7 @@ Every filter created by Leonardo '_Fyat' Gava for the [Regolith](https://github.
 |--------------|----------------|------------------------------------------------------------------------------------------------------|-----------------|
 | [rego-glyph](./rego-glyph/) |      indev     | Generates a markdown containing all icon configuration in the glyph_E1.png image. [Click here](./rego-glyph/example/) to see an example. |        ✔        |
 | [rego-remover](./rego-remover/) |      1.1.1     | Remove extra files or objects from the build such as: .bbmode, .ase, Geckolib Animation Artifacts and Aseprite Flipbook from invalid paths. |        ✔        |
-| [rego-uuid](./rego-uuid/) |      indev     | Setup every uuid for your project. |        ✔        |
+| [rego-uuid](./rego-uuid/) |      1.0.0     | Setup every manifest uuid for your project. |        ✔        |
 | [rego-level](./rego-level/)    |      1.0.0     | Remove the old world files to new ones on every build. (Need game restart every time)                |        ✖        |
 
 ### Contact
