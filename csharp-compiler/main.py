@@ -6,8 +6,8 @@ def main():
   this_path = os.path.realpath(__file__)
   filters_dir = os.path.dirname(this_path)
 
-  parent_dir = os.path.dirname(path)
-  project_dir = os.path.abspath(os.path.join(parent, '..', '..', '..'))
+  parent_dir = os.path.dirname(filters_dir)
+  project_dir = os.path.abspath(os.path.join(parent_dir, '..', '..', '..'))
 
   print("Compiling C# filters...")
   print("")
