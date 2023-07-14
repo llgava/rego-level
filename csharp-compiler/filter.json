@@ -1,0 +1,10 @@
+{
+  "description": "Automatically build a .dll file for all C# local filters on the project.",
+  "filters": [
+    {
+      "name": "csharp-compiler",
+      "runWith": "python",
+      "script": "./main.py"
+    }
+  ]
+}
