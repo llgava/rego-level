@@ -2,20 +2,17 @@ import os
 import sys
 import subprocess
 
+from utils.regolith import *
+
+THIS_FILE_PATH = os.path.realpath(__file__)
+CSHARP_COMPILER_PATH = os.path.dirname(THIS_FILE_PATH)
+PROJECT_ROOT = os.path.abspath(os.path.join(CSHARP_COMPILER_PATH, '..', )) # os.path.abspath(os.path.join(CSHARP_COMPILER_PATH, '..', '..', '..', '..'))
+PROJECT_CONFIGURATION = os.path.join(PROJECT_ROOT, "config.json")
+
 def main():
-  this_path = os.path.realpath(__file__)
-  filters_dir = os.path.dirname(this_path)
-
-  parent_dir = os.path.dirname(filters_dir)
-  project_dir = os.path.abspath(os.path.join(parent_dir, '..', '..', '..'))
-
   print("Compiling C# filters...")
-  print("")
 
-  print("THIS_PATH", this_path)
-  print("FILTERS_DIR", filters_dir)
-  print("PARENT_DIR", parent_dir)
-  print("PROJECT_DIR", project_dir)
+  Regolith.build_csharp_filters(PROJECT_ROOT, PROJECT_CONFIGURATION)
 
 if __name__ == '__main__':
   main()
