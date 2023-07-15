@@ -3,8 +3,8 @@ Every filter created by Leonardo '_Fyat' Gava for the [Regolith](https://github.
 
 | Project      | Latest Version | Description                                                                                          | Support/Updates |
 |--------------|----------------|------------------------------------------------------------------------------------------------------|-----------------|
-| [csharp-compiler](./csharp-compiler/) |      indev     | Automatically build a .dll file for all C# local filters on the project. |                |
-| [rego-glyph](./rego-glyph/) |      indev     | Generates a markdown containing all icon configuration in the glyph_E1.png image. [Click here](./rego-glyph/example/) to see an example. |                |
+| [csharp-compiler](./csharp-compiler/) |      1.0.0     | Automatically build a .dll file for all C# local filters on the project. |        ✔        |
+| [rego-glyph](./rego-glyph/) |      indev     | Generates a markdown containing all icon configuration in the glyph_E1.png image. [Click here](./rego-glyph/example/) to see an example. |        ?        |
 | [rego-remover](./rego-remover/) |      1.1.1     | Remove extra files or objects from the build such as: .bbmode, .ase, Geckolib Animation Artifacts and Aseprite Flipbook from invalid paths. |        ✔        |
 | [rego-level](./rego-level/)    |      1.0.0     | Remove the old world files to new ones on every build. (Need game restart every time)                |        ✖        |
 
