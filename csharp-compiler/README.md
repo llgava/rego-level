@@ -41,4 +41,4 @@ You also need to follow a pattern for your C# path. See the example bellow:
 ...
 ```
 
-Basically the default for the path should be `./YOUR_FILTER_PATH/Build/YOUR_FILTER_NAME.dll`
+Basically the pattern for the path should be `./YOUR_FILTER_PATH/Build/YOUR_FILTER_NAME.dll`
