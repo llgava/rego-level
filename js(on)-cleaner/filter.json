@@ -2,7 +2,7 @@
   "description": "A fork of the original filter 'json_cleaner' in order to make it compatible with JS files.",
   "filters": [
     {
-      "name": "js[on]-cleaner",
+      "name": "js(on)-cleaner",
       "runWith": "python",
       "script": "./main.py"
     }
