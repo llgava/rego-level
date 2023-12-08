@@ -32,8 +32,8 @@ def remove_js_comments_from(content):
 
   content = re.sub(r'//.*', '', content)
   content = re.sub(r'/\*.*?\*/', '', content, flags=re.DOTALL)
-  content_lines = [line.strip() for line in content.splitlines() if line.strip()]
-  content = ''.join(content_lines)
+  content_lines = [line for line in content.splitlines() if line.strip() != '']
+  content = '\n'.join(content_lines)
 
   return content
 
