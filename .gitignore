@@ -5,3 +5,5 @@
 **/__test__
 **/RP
 **/BP
+**/package-lock.json
+**/yarn.lock

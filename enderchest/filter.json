@@ -1,0 +1,10 @@
+{
+  "description": "Encrypt your Minecraft code with AES symmetric algorithm.",
+  "filters": [
+    {
+      "name": "enderchest",
+      "runWith": "nodejs",
+      "script": "./core/index.js"
+    }
+  ]
+}
