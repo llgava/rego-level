@@ -1,3 +1,5 @@
+import { glob } from 'glob';
+import { EnderChest } from "./EnderChest.js";
 import { Logger } from "./utils/Logger.js";
 import { Settings } from "./utils/Settings.js";
 
@@ -8,7 +10,7 @@ function initialize() {
   }
 
   if (!Settings.isValidKeyBitsSize()) {
-    Logger.error(`SOURCE CODE NOT ENCRYPTED >> The "keySize" value of ${Settings.keySize} is not valid. The options are 64, 128, 192 or 256.`);
+    Logger.error(`SOURCE CODE NOT ENCRYPTED >> The "keySize" value of ${Settings.keySize} is not valid. The options are 128, 192 or 256.`);
     return;
   }
 
@@ -16,6 +18,12 @@ function initialize() {
     Logger.error(`SOURCE CODE NOT ENCRYPTED >> The length of "secretKey" should be ${Settings.keySize / 8} for ${Settings.keySize}-bits. The parsed length was ${Settings.secretKey.length}.`);
     return;
   }
+
+  const cryptedText = EnderChest.encrypt('namespace:identifier');
+
+  glob(["BP/**/*.json"]).then((file) => {
+    console.log(EnderChest.collectAndEncryptIdentifier(file[2]))
+  });
 }
 
 initialize();
