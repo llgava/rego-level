@@ -2,6 +2,7 @@ import { glob } from 'glob';
 import { EnderChest } from "./EnderChest.js";
 import { Logger } from "./utils/Logger.js";
 import { Settings } from "./utils/Settings.js";
+import { EnderChestContent } from './EnderChestContent.js';
 
 function initialize() {
   if (!Settings.secretKey) {
@@ -22,8 +23,11 @@ function initialize() {
   const cryptedText = EnderChest.encrypt('namespace:identifier');
 
   glob(["BP/**/*.json"]).then((file) => {
-    console.log(EnderChest.collectAndEncryptIdentifier(file[2]))
+    EnderChest.identifier.encryptAndSave(file[2]);
+
+    console.log(JSON.stringify(EnderChestContent.CONTENT.get('ae82-ab4c')));
   });
+
 }
 
 initialize();
