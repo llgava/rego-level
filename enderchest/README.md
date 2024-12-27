@@ -1,7 +1,9 @@
 # enderchest
 Encrypt your Minecraft code with AES symmetric algorithm.
 
-> [!WARNING] Not recommended for Add-Ons development!
+> [!WARNING]
+> **Not recommended for Add-Ons development!**
+> 
 > **Why?** Since Add-Ons are like java mods and you want give more liberty for the player be able to do what they want with your product, why limit they to summon custom entities, setblock custom blocks etc...?
 > 
 > This filter is only recommended for IP products or other things like adventure maps.
@@ -22,7 +24,7 @@ regolith install github.com/llgava/regolith-filters/enderchest
         "secretKey": "my_beautiful_key", /* Should correspond to the key size! For example 128 bits = 16 characters. */
 
         /*
-          Array of files that should be ignored. Vanilla files are already included in built-in.
+          Array of files that should be ignored. Vanilla files and Manifests are already included in built-in.
           You can also use glob here to define a entire directory.
         */
         "ignore": [],

@@ -1,24 +1,42 @@
-import path from 'path';
+import { EnderChest } from "./EnderChest.js";
 import { EnderChestUtils } from "./utils/EnderChestUtils.js";
 
 export class EnderChestContent {
+  /** @type {Map<string, any>} */
   static CONTENT = new Map();
-  _id; data;
 
-  constructor(original, hash, filePath) {
-    const fileName = path.basename(filePath);
+  /** @type {string} */
+  _id;
+
+  /** @type {string} */
+  filePath;
+
+  /** @type {string} */
+  encryptedFilePath;
+
+  /** @type {Array<{ hash: string, original: string, encrypted: string }>} The content data. */
+  data;
+
+  constructor(filePath) {
     this._id = EnderChestUtils.generateFileId(filePath);
+    this.filePath = filePath;
+    this.encryptedFilePath = EnderChestUtils.encryptFilePath(filePath);
 
-    if (EnderChestContent.CONTENT.has(this._id)) {
-      this.data = EnderChestContent.CONTENT.get(this._id).data;
-      this.data.values.push({ hash, original, encrypted: hash.substring(0, 32) });
-      return;
-    }
+    this.data = [];
 
-    this.data = {
-      filePath,
-      encryptedPath: filePath.replace(fileName, `${this._id}.json`),
-      values: [{ hash, original, encrypted: hash.substring(0, 32) }]
-    };
+    EnderChestContent.CONTENT.set(this._id, this);
+  }
+
+  /**
+   * 
+   * @param {string} original 
+   * @param {string} encrypted 
+   */
+  addDataValue(original, encrypted) {
+    this.data.push({
+      hash: EnderChest.encrypt(original),
+      original,
+      encrypted
+    });
   }
 }

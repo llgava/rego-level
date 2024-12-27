@@ -1,9 +1,16 @@
 const args = process.argv[2] ? JSON.parse(process.argv[2]) : {};
 
 export class Settings {
+  /** @type {number} */
   static keySize = args.keySize || 192;
+
+  /** @type {string} */
   static secretKey = args.secretKey || undefined;
+
+  /** @type {string[]} */
   static ignore = args.ignore || [];
+
+  /** @type {boolean} */
   static writeRelatory = args.writeRelatory || true;
 
   static isValidKeyBitsSize() {

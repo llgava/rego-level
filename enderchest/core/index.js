@@ -4,6 +4,11 @@ import { Logger } from "./utils/Logger.js";
 import { Settings } from "./utils/Settings.js";
 import { EnderChestContent } from './EnderChestContent.js';
 
+Settings.ignore.push(
+  "**/*/manifest.json",
+  "**/*/languages.json"
+);
+
 function initialize() {
   if (!Settings.secretKey) {
     Logger.error('SOURCE CODE NOT ENCRYPTED >> The "secretKey" settings was not parsed in filter configuration.');
@@ -20,12 +25,13 @@ function initialize() {
     return;
   }
 
-  const cryptedText = EnderChest.encrypt('namespace:identifier');
+  glob(["BP/**/*.json"], { ignore: Settings.ignore }).then((files) => {
+    for (const file of files) {
+      console.log(file)
+      EnderChest.identifier.encryptAndSave(file);
+    }
 
-  glob(["BP/**/*.json"]).then((file) => {
-    EnderChest.identifier.encryptAndSave(file[2]);
-
-    console.log(JSON.stringify(EnderChestContent.CONTENT.get('ae82-ab4c')));
+    console.log(EnderChestContent.CONTENT);
   });
 
 }
