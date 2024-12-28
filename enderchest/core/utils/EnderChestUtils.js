@@ -9,7 +9,6 @@ export class EnderChestUtils {
    * @returns {string} The file path ID.
    */
   static generateFileId(filePath) {
-
     const hash = crypto.createHash('sha256')
       .update(filePath).digest('hex');
   

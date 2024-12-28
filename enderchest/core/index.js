@@ -3,11 +3,14 @@ import { EnderChest } from "./EnderChest.js";
 import { Logger } from "./utils/Logger.js";
 import { Settings } from "./utils/Settings.js";
 import { EnderChestContent } from './EnderChestContent.js';
+import { VerySimpleScriptWrintingTextFile } from './web/VerySimpleScriptWrintingTextFile.js';
 
+// ===================== NEED TO BE UPDATED ===================== 
 Settings.ignore.push(
   "**/*/manifest.json",
   "**/*/languages.json"
 );
+// ==============================================================
 
 function initialize() {
   if (!Settings.secretKey) {
@@ -27,13 +30,12 @@ function initialize() {
 
   glob(["BP/**/*.json"], { ignore: Settings.ignore }).then((files) => {
     for (const file of files) {
-      console.log(file)
       EnderChest.identifier.encryptAndSave(file);
     }
 
-    console.log(EnderChestContent.CONTENT);
+    VerySimpleScriptWrintingTextFile.buildWebView();
+    VerySimpleScriptWrintingTextFile.buildTextFile();
   });
-
 }
 
 initialize();

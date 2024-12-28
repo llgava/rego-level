@@ -2,19 +2,21 @@ import { EnderChest } from "./EnderChest.js";
 import { EnderChestUtils } from "./utils/EnderChestUtils.js";
 
 export class EnderChestContent {
-  /** @type {Map<string, any>} */
-  static CONTENT = new Map();
+  /** @type {Map<string, EnderChestContent>} */
+  static #CONTENT = new Map();
 
-  /** @type {string} */
+  /** @type {string} The file path ID. */
   _id;
 
-  /** @type {string} */
+  /** @type {string} The original file path. */
   filePath;
 
-  /** @type {string} */
+  /** @type {string} The encrypted file path. */
   encryptedFilePath;
 
-  /** @type {Array<{ hash: string, original: string, encrypted: string }>} The content data. */
+  /**
+   * @type {Array<{ hash: string, original: string, encrypted: string }>} The encrypted data array.
+   * */
   data;
 
   constructor(filePath) {
@@ -24,13 +26,13 @@ export class EnderChestContent {
 
     this.data = [];
 
-    EnderChestContent.CONTENT.set(this._id, this);
+    EnderChestContent.#CONTENT.set(this._id, this);
   }
 
   /**
-   * 
-   * @param {string} original 
-   * @param {string} encrypted 
+   * Adds new encrypted data to this content.
+   * @param {string} original The original content value.
+   * @param {string} encrypted The encrypted content value.
    */
   addDataValue(original, encrypted) {
     this.data.push({
@@ -38,5 +40,14 @@ export class EnderChestContent {
       original,
       encrypted
     });
+  }
+
+  /**
+   * Get all or specific encrypted content.
+   * @param {string|undefined} key The content key.
+   * @returns {Map<string, EnderChestContent>} If a key is parsed, just one content will be returned.
+   */
+  static getContent(key = undefined) {
+    return !key ? EnderChestContent.#CONTENT : EnderChestContent.#CONTENT.get(key);
   }
 }
