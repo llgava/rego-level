@@ -60,7 +60,6 @@
       gap: 10px;
     }
 
-    /* Estilo da barra de busca */
     .search-container {
       margin-bottom: 20px;
       display: flex;
@@ -76,6 +75,24 @@
       border: 1px solid #ccc;
     }
 
+    #detailsTable {
+      display: none;
+    }
+
+    .back-btn {
+      /* margin-top: 20px; */
+      display: inline-block;
+      background-color: #8073ff;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 4px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .back-btn:hover {
+      background-color: #8073ff;
+    }
   </style>
 </head>
 <body>
@@ -85,6 +102,7 @@
     <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Pesquisar por ID ou Nome do Arquivo Original...">
   </div>
 
+  <!-- Tabela Principal -->
   <table id="fileTable">
     <thead>
       <tr>
@@ -97,35 +115,34 @@
     <tbody>
       {{#each contents}}
       <tr>
-        <td>{{id}}</td>
+        <td><strong>{{id}}</strong></td>
         <td>
-          <a href="file://{{fullFilePath}}" title="Clique para abrir o diretório: {{filePath}}">
+          <a href="#" onclick="showDetails('{{id}}', {{json data}})" title="Clique para ver detalhes">
             {{filePath}}
           </a>
         </td>
         <td>{{encryptedFilePath}}</td>
         <td>{{dataSize}}</td>
-
-          <thead>
-            <tr>
-              <th><strong>Hash</strong></th>
-              <th><strong>Original</strong></th>
-              <th><strong>Encrypted</strong></th>
-            </tr>
-          </thead>
-          <tbody>
-            {{#each data}}
-            <tr>
-              <td>{{this.hash}}</td>
-              <td>{{this.original}}</td>
-              <td>{{this.encrypted}}</td>
-            </tr>
-            {{/each}}
-          </tbody>
       </tr>
-
-      <!-- Other Table -->
       {{/each}}
+    </tbody>
+  </table>
+
+  <!-- Botão Voltar -->
+  <a id="backButton" class="back-btn" onclick="goBack()" style="display: none;">Voltar</a>
+
+  <!-- Tabela de Detalhes -->
+  <table id="detailsTable">
+    <thead>
+      <tr>
+        <th><strong>Hash</strong></th>
+        <th><strong>Original Value</strong></th>
+        <th><strong>Encrypted Value</strong></th>
+        <th><strong>Type</strong></th>
+      </tr>
+    </thead>
+    <tbody id="detailsTableBody">
+      <!-- Preenchido dinamicamente -->
     </tbody>
   </table>
 
@@ -147,6 +164,39 @@
           rows[i].style.display = "none";
         }
       }
+    }
+
+    function showDetails(id, data) {
+      // Ocultar tabela principal
+      document.getElementById("fileTable").style.display = "none";
+
+      // Preencher a tabela de detalhes com dados fictícios
+      let detailsBody = document.getElementById("detailsTableBody");
+      detailsBody.innerHTML = "";
+
+      data.forEach((content, i) => {
+        detailsBody.innerHTML += `
+          <tr>
+            <td title=${content.hash}><strong>${content.hash.slice(0, 8) + "..."}</strong></td>
+            <td>${content.original}</td>
+            <td>${content.encrypted}</td>
+            <td>${content.type}</td>
+          </tr>
+        `;
+      });
+
+      // Exibir a tabela de detalhes e o botão de voltar
+      document.getElementById("detailsTable").style.display = "table";
+      document.getElementById("backButton").style.display = "inline-block";
+    }
+
+    function goBack() {
+      // Ocultar a tabela de detalhes e o botão de voltar
+      document.getElementById("detailsTable").style.display = "none";
+      document.getElementById("backButton").style.display = "none";
+
+      // Mostrar a tabela principal
+      document.getElementById("fileTable").style.display = "table";
     }
   </script>
 

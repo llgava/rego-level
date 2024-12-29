@@ -1,8 +1,8 @@
 import fs from 'fs';
 import jsonpath from 'jsonpath';
 import { EnderChest } from '../EnderChest.js';
-import { EnderChestUtils } from '../utils/EnderChestUtils.js';
 import { EnderChestContent } from '../EnderChestContent.js';
+import { ContentTypes } from './ContentType.js';
 
 export class Identifier {
   static REGEX = /^(?!minecraft:)[a-zA-Z0-9_]+:[a-zA-Z0-9_]+$/;
@@ -36,7 +36,7 @@ export class Identifier {
       const path = jsonpath.paths(data, JSONPath)[0];
 
       if (Identifier.isValidIdentifier(identifier)) {
-        content.addDataValue(identifier, encrypted);
+        content.addDataValue(identifier, encrypted, ContentTypes.IDENTIFIER);
         jsonpath.apply(data, jsonpath.stringify(path), () => encrypted);
       }
 

@@ -15,7 +15,7 @@ export class EnderChestContent {
   encryptedFilePath;
 
   /**
-   * @type {Array<{ hash: string, original: string, encrypted: string }>} The encrypted data array.
+   * @type {Array<{ hash: string, original: string, encrypted: string, type: string }>} The encrypted data array.
    * */
   data;
 
@@ -33,12 +33,14 @@ export class EnderChestContent {
    * Adds new encrypted data to this content.
    * @param {string} original The original content value.
    * @param {string} encrypted The encrypted content value.
+   * @param {any} type The content data type. Use "ContentTypes".
    */
-  addDataValue(original, encrypted) {
+  addDataValue(original, encrypted, type) {
     this.data.push({
       hash: EnderChest.encrypt(original),
       original,
-      encrypted
+      encrypted,
+      type: type.toUpperCase() || 'UNDEFINED'
     });
   }
 

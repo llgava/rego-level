@@ -10,6 +10,10 @@ const __dirname = path.dirname(__filename);
 export class VerySimpleScriptWrintingTextFile {
 
   static buildWebView() {
+    Handlebars.registerHelper('json', function(ctx) {
+      return JSON.stringify(ctx);
+    });
+
     const templateHTMLPath = path.join(__dirname, 'index.html');
     const outputPath = path.join('BP/', 'ender_chest_content.html');
 
@@ -36,6 +40,12 @@ export class VerySimpleScriptWrintingTextFile {
     const filePath = path.join('BP/', 'future_webview.txt');
 
     for (const [key, value] of EnderChestContent.getContent()) {
+      const i = Array.from(EnderChestContent.getContent().keys()).indexOf(key);
+
+      if (i !== 0) {
+        content += "\n";
+      }
+
       content += `[${key}] - ${value.encryptedFilePath} -> ${value.filePath}\n`;
       
       if (value.data.length > 0) {
