@@ -11,8 +11,8 @@ export class Identifier {
     "$..description.identifier",
 
     // Behavior Pack Items
-    '$..components["minecraft:entity_placer"].entity',
-    '$..components["minecraft:block_placer"].block'
+    '$["minecraft:item"]..["minecraft:entity_placer"].entity',
+    '$..["minecraft:block_placer"].block'
   ];
 
   encryptAndSave(filePath) {
@@ -22,22 +22,24 @@ export class Identifier {
     const content = new EnderChestContent(filePath);
     
     for (const JSONPath of Identifier.#PATHS) {
-      const identifier = jsonpath.query(data, JSONPath)[0];
+      const identifiers = jsonpath.query(data, JSONPath);
 
-      if (!identifier) {
+      if (identifiers.length === 0) {
         fs.writeFileSync(content.encryptedFilePath, JSON.stringify(data, null, 2));
         continue;
       };
 
-      const hash = EnderChest.encrypt(identifier);
-      const truncatedHash = hash.substring(0, 32); // Limits to 32 characters for big hashs.
+      for (const identifier of identifiers) {
+        const i = identifiers.indexOf(identifier);
+        const hash = EnderChest.encrypt(identifier);
+  
+        const encrypted = `${hash.slice(0, 16)}:${hash.slice(-16)}`;
+        const path = jsonpath.paths(data, JSONPath)[i];
 
-      const encrypted = `${truncatedHash.slice(0, 16)}:${truncatedHash.slice(16)}`;
-      const path = jsonpath.paths(data, JSONPath)[0];
-
-      if (Identifier.isValidIdentifier(identifier)) {
-        content.addDataValue(identifier, encrypted, ContentTypes.IDENTIFIER);
-        jsonpath.apply(data, jsonpath.stringify(path), () => encrypted);
+        if (Identifier.isValidIdentifier(identifier)) {
+          content.addDataValue(identifier, encrypted, ContentTypes.IDENTIFIER);
+          jsonpath.apply(data, jsonpath.stringify(path), () => encrypted);
+        }
       }
 
       fs.writeFileSync(content.encryptedFilePath, JSON.stringify(data, null, 2));

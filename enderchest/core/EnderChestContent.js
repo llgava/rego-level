@@ -1,3 +1,4 @@
+import fs from "fs";
 import { EnderChest } from "./EnderChest.js";
 import { EnderChestUtils } from "./utils/EnderChestUtils.js";
 
@@ -15,7 +16,7 @@ export class EnderChestContent {
   encryptedFilePath;
 
   /**
-   * @type {Array<{ hash: string, original: string, encrypted: string, type: string }>} The encrypted data array.
+   * @type {Array<{ hash: string, original: string, encrypted: string, type: string, line: number }>} The encrypted data array.
    * */
   data;
 
@@ -40,8 +41,23 @@ export class EnderChestContent {
       hash: EnderChest.encrypt(original),
       original,
       encrypted,
-      type: type.toUpperCase() || 'UNDEFINED'
+      type: type.toUpperCase() || 'UNDEFINED',
+      line: this.#getEncryptedDataLine(original)
     });
+  }
+
+  #getEncryptedDataLine(original) {
+    const rawData = fs.readFileSync(this.filePath, { encoding: "utf-8" });
+    const lines = rawData.split('\n');
+
+    for (const [i, line] of lines.entries()) {
+      const code = i + 1;
+
+      if (!line.includes(original)) continue;
+      if (this.data.filter((content) => content.line === code).length > 0) continue;
+
+      return code;
+    }
   }
 
   /**
@@ -51,5 +67,9 @@ export class EnderChestContent {
    */
   static getContent(key = undefined) {
     return !key ? EnderChestContent.#CONTENT : EnderChestContent.#CONTENT.get(key);
+  }
+
+  static getParsedJSON() {
+    return Object.fromEntries(this.getContent());
   }
 }

@@ -10,8 +10,8 @@ export class Settings {
   /** @type {string[]} */
   static ignore = args.ignore || [];
 
-  /** @type {boolean} */
-  static writeRelatory = args.writeRelatory || true;
+  /** @type {"html"|"json"|boolean} */
+  static writeRelatory = args.writeRelatory || false;
 
   static isValidKeyBitsSize() {
     return this.keySize === 128 ||

@@ -14,7 +14,7 @@ regolith install github.com/llgava/regolith-filters/enderchest
 ```
 
 ## Configuration
-```json
+```jsonc
 {
   "filters": [
     {
@@ -30,11 +30,37 @@ regolith install github.com/llgava/regolith-filters/enderchest
         "ignore": [],
 
         /*
-          Generates a simple HTML listing all encrypted content with original values and directories.
+          Generates a simple HTML or JSON files listing all encrypted content with original values.
           This option is only for development purpose!
+
+          Possible options:
+            - true = Generates an HTML file (enderchest_webview.html) and JSON file (enderchest.json) with encrypted content.
+            - false = Nothing will be generated. (Default option)
+            - "html" = Generates ONLY the HTML file (enderchest_webview.html) with encrypted content.
+            - "json" = Generates ONLY the JSON file (enderchest.json) with encrypted content.
         */
         "writeRelatory": true
       }
+    }
+  ]
+}
+```
+
+## How an encrypted data looks like?
+
+```jsonc
+{
+  "_id": "0a1b-2c3d",
+  "filePath": "BP/items/my_custom_item.item.json",
+  "encryptedFilePath": "BP/items/0a1b-2c3d.json",
+  "data": [
+
+    // A list of all encrypted content on this file.
+    {
+      "type": "IDENTIFIER",
+      "hash": "4d899196dc6c9a140d36f05844f3fe67",
+      "original": "my_custom:item_identifier",
+      "encrypted": "4d899196dc6c9a14:0d36f05844f3fe67"
     }
   ]
 }

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EnderChest Webview</title>
+</head>
+<body>
+
+  <h2>EnderChest</h2>
+  <div class="search-container">
+    <input type="text" id="searchInput" onKeyUp="searchTable()" placeholder="Pesquisar por ID ou Nome do Arquivo Original...">
+  </div>
+
+  <!-- Tabela Principal -->
+  <table id="fileTable">
+    <thead>
+      <tr>
+        <th><strong>ID</strong></th>
+        <th><strong>Original file</strong></th>
+        <th><strong>Encrypted file</strong></th>
+        <th><strong>Data Size</strong></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each contents}}
+      <tr class="trContent" onClick="showDetails('{{id}}', {{json data}})" title="Click Here to see the encrypted data">
+        <td><strong>{{id}}</strong></td>
+        <td>{{filePath}}</td>
+        <td>{{encryptedFilePath}}</td>
+        <td>{{dataSize}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  <!-- Botão Voltar -->
+  <a id="backButton" class="back-btn" onClick="goBack()" style="display: none;">Voltar</a>
+
+  <!-- Tabela de Detalhes -->
+  <table id="detailsTable">
+    <thead>
+      <tr>
+        <th><strong>Hash</strong></th>
+        <th><strong>Original Value</strong></th>
+        <th><strong>Encrypted Value</strong></th>
+        <th><strong>Type</strong></th>
+        <th><strong>Line</strong></th>
+      </tr>
+    </thead>
+    <tbody id="detailsTableBody">
+      <!-- Preenchido dinamicamente -->
+    </tbody>
+  </table>
+
+  <div class="footer">
+    Powered by Seface Studios
+  </div>
+</body>
+</html>
